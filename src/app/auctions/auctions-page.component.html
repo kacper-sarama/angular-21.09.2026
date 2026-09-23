@@ -1,0 +1,34 @@
+ <section>
+    <!-- <h2>Lista naszych aukcji {{auctionsFromServiceInject.auctions.value()?.length}}</h2> -->
+    <h2>Lista naszych aukcji {{auctionsFromServiceInject.count()}}</h2>
+    <div class="row gap-4">
+
+        @if (auctionsFromServiceInject.allAuctions()) {    
+             <!-- @for(auction of auctionsFromRequest(); track auction) { -->
+            @for(auction of auctionsFromServiceInject.allAuctions(); track auction.id) {
+                <app-auction-card [auctionItemIinput]="auction" (addToCartEvent)="handleAuctionFromChild($event)"></app-auction-card>
+                <!-- <div class="card" style="width: 18rem;">
+                    <img [src]="auction.imgUrl" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{auction.title}}</h5>
+                        <p class="card-text">{{auction.description}}</p>
+                        <a href="#" class="btn btn-primary">Do koszyka</a>
+                    </div>
+                </div> -->
+            }
+        } 
+        @else if (auctionsFromServiceInject.areAuctionsLoading()) {
+            <div>Loading user info...</div>
+        }
+        @else if (auctionsFromServiceInject.error()) {
+            <div class="alert alert-danger" role="alert">
+                A simple primary alert, check it out!
+            </div>
+        } 
+
+
+       
+    </div>
+</section>
+
+

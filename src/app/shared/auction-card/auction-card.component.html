@@ -1,0 +1,13 @@
+@let auction = auctionItemIinput();
+
+@if (auction) {
+    <div class="card" style="width: 18rem;">
+        <img [src]="auction?.imgUrl" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{auction.price}}</h5>
+            <p class="card-text">{{auction.description}}</p>
+            <!-- <a [src]="auctionItemIinput()?.imgUrl" class="btn btn-primary">Do koszyka</a> -->
+            <a class="btn btn-primary" (click)="handleAddAuctionCard()">Do koszyka</a>
+        </div>
+    </div>
+}
