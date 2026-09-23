@@ -1,4 +1,4 @@
-import { computed, Service, signal } from '@angular/core';
+import { computed, inject, Service, signal } from '@angular/core';
 import { HttpClient, httpResource } from '@angular/common/http';
 import { Auction } from './auctions-page.component';
 import { environment } from '../../environments/environment';
@@ -6,6 +6,8 @@ import { environment } from '../../environments/environment';
 
 @Service()
 export class AuctionsService {
+
+    private httpClient = inject(HttpClient);
 
     // private baseUrl = 'http://localhost:3000/auctions';
     private baseUrl = environment.backendURL;
@@ -32,6 +34,9 @@ export class AuctionsService {
     addNew(auction: Omit<Auction, 'id'>) {
     // addNew(auction: AuctionItem) {
     console.log('Tutaj TODO, wysylka POST na Rest API', auction)
+
+    return this.httpClient.post<Auction>(`${this.baseUrl}/auctions`, auction)
+    // return this.httpClient.post<Auction>(`${this.baseUrl}/auctions`, auction);
     // auction.id
   }
 

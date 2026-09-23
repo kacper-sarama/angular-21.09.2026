@@ -26,6 +26,14 @@
       "imgUrl": "https://picsum.photos/id/183/600/600",
       "description": "Zabytkowy ogórek",
       "price": 1200
+    },
+    {
+      "title": "6",
+      "price": 6,
+      "description": "",
+      "imgUrl": "https://picsum.photos/id/6/600/600",
+      "id": "wYDba6kOcxE"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

@@ -1,5 +1,5 @@
 import {Component, computed, inject, signal} from '@angular/core';
-import {form, FormField, FormRoot, required} from '@angular/forms/signals';
+import {form, FormField, FormRoot, min, required} from '@angular/forms/signals';
 import { Auction } from '../auctions-page.component';
 import { AuctionsService } from '../auctions.service';
 
@@ -17,6 +17,8 @@ export interface AuctionModel{
   templateUrl: './add-auction-page.component.html',
 })
 export class AddAuctionPageComponent {
+
+  private auctionService = inject(AuctionsService);
 
   // loginModel = signal({
   //   email: '',
@@ -41,6 +43,7 @@ export class AddAuctionPageComponent {
     this.formModel,
     (schemaPath) => {
       required(schemaPath.title, {message: 'Podaj tytul'});
+      min(schemaPath.price, 0, {message: 'Nie moze byc mniej niz 0'})
     },
     {
     submission: {
@@ -56,13 +59,18 @@ export class AddAuctionPageComponent {
           imgUrl: this.imgUrl()
         }
 
-        console.log('newAuction: ', newAuction)
-        this.auctionsFromServiceInject.addNew(newAuction);
+        // this.auctionService.addNew(newAuction);
 
+        this.auctionsFromServiceInject.addNew(newAuction).subscribe((newAuction) => {
+
+        console.log('newAuction: ', newAuction)
+        
         this.formModel.set(this.initialState);
-      }
+        
+        this.auctionForm().reset();
+      })
     }
-  });
+  }});
 
 //   async onSubmit() {
 //   const formData = this.formModel();
@@ -71,19 +79,19 @@ export class AddAuctionPageComponent {
 //   // await this.authService.login(formData);
 // }
 
-handleFormSubmit(event: Event): void {
-    event.preventDefault();
+// handleFormSubmit(event: Event): void {
+//     event.preventDefault();
 
-    if (this.auctionForm().invalid()) {
-      // nie ma markAllAsTouched jeszcze...
-      // this.sampleForm().markAsTouched();
-      // this.auctionForm.title().markAsTouched();
-      // this.sampleForm.post().markAsTouched();
-      // this.errorMessage.set('Popraw błędy w formularzu !');
-      return;
-    }
-    alert(JSON.stringify(this.formModel()));
-    // this.auctionsFromServiceInject.addNew(newAuction)
-  }
+//     if (this.auctionForm().invalid()) {
+//       // nie ma markAllAsTouched jeszcze...
+//       // this.sampleForm().markAsTouched();
+//       // this.auctionForm.title().markAsTouched();
+//       // this.sampleForm.post().markAsTouched();
+//       // this.errorMessage.set('Popraw błędy w formularzu !');
+//       return;
+//     }
+//     alert(JSON.stringify(this.formModel()));
+//     this.auctionsFromServiceInject.addNew(this.newAuction)
+//   }
 
 }
