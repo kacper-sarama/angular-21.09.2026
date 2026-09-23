@@ -23,7 +23,9 @@ title: string
 })
 export class AuctionsPageComponent implements OnInit {
 
-  constructor(private auctionService: AuctionsService){}
+  constructor(
+    // private auctionService: AuctionsService
+  ){}
 
   // auctionsFromRequest = signal<Auction[]>([]);
 
@@ -40,6 +42,8 @@ export class AuctionsPageComponent implements OnInit {
     // })
 
     // this.auctionsFromService = this.auctionsFromServiceInject.auctions
+
+    this.auctionsFromServiceInject.reloadAuctions();
   }
 
   handleAuctionFromChild(auction: Auction) {
