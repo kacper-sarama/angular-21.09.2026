@@ -1,4 +1,4 @@
-import { computed, Service } from '@angular/core';
+import { computed, Service, signal } from '@angular/core';
 import { HttpClient, httpResource } from '@angular/common/http';
 import { Auction } from './auctions-page.component';
 import { environment } from '../../environments/environment';
@@ -28,5 +28,11 @@ export class AuctionsService {
     reloadAuctions() {
         this.auctions.reload();
     }
+
+    addNew(auction: Omit<Auction, 'id'>) {
+    // addNew(auction: AuctionItem) {
+    console.log('Tutaj TODO, wysylka POST na Rest API', auction)
+    // auction.id
+  }
 
 }
