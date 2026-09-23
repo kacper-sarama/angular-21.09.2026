@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   imports: [],
@@ -6,4 +7,11 @@ import { Component } from '@angular/core';
   styleUrl: './promotions.component.css',
   templateUrl: './promotions.component.html',
 })
-export class PromotionsComponent {}
+export class PromotionsComponent {
+  
+  router = inject(Router);
+
+  handleGoHome() {
+    this.router.navigate(['/']);
+  }
+}

@@ -1,13 +1,16 @@
 import { computed, Service } from '@angular/core';
 import { HttpClient, httpResource } from '@angular/common/http';
 import { Auction } from './auctions-page.component';
+import { environment } from '../../environments/environment.development';
+
 
 @Service()
 export class AuctionsService {
 
-    private baseUrl = 'http://localhost:3000/auctions';
+    // private baseUrl = 'http://localhost:3000/auctions';
+    private baseUrl = environment.backendURL;
 
-    private auctions = httpResource<Auction[]>(() => this.baseUrl);
+    private auctions = httpResource<Auction[]>(() => `${this.baseUrl}/auctions`);
 
     allAuctions = computed(() => {
         if (this.auctions.hasValue()) {
