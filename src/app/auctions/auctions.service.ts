@@ -1,7 +1,7 @@
 import { computed, Service } from '@angular/core';
 import { HttpClient, httpResource } from '@angular/common/http';
 import { Auction } from './auctions-page.component';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 
 
 @Service()
