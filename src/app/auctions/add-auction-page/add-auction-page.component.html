@@ -50,7 +50,7 @@
         </div>
         <div class="d-flex justify-content-end">
         <!-- <button class="btn btn-primary" (click)="onSubmit()">Dodaj aukcję</button> -->
-         <button class="btn btn-primary" type="submit">Dodaj aukcję</button>
+         <button class="btn btn-primary" type="submit" [style.opacity]="auctionForm().valid() ? 1 : 0.5">Dodaj aukcję</button>
         </div>
     </form>
     </div>

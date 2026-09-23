@@ -1,5 +1,5 @@
 import {Component, computed, inject, signal} from '@angular/core';
-import {form, FormField, FormRoot} from '@angular/forms/signals';
+import {form, FormField, FormRoot, required} from '@angular/forms/signals';
 import { Auction } from '../auctions-page.component';
 import { AuctionsService } from '../auctions.service';
 
@@ -37,7 +37,12 @@ export class AddAuctionPageComponent {
 
   imgUrl = computed(() => `https://picsum.photos/id/${this.formModel().imgId}/600/600`);
 
-  auctionForm = form(this.formModel, () => {}, {
+  auctionForm = form(
+    this.formModel,
+    (schemaPath) => {
+      required(schemaPath.title, {message: 'Podaj tytul'});
+    },
+    {
     submission: {
       action: async () => {
         console.log('aktualna wartosc formularza: ', this.formModel)
